@@ -15,10 +15,14 @@
     </form>
     {% if result is not none %}
     <h3>Result: </h3>
+    {% if result is string %}
+    <p>{{ result }}</p>
+    {% else %}
     <p>First Name: {{ result.name[0].given[0] }}</p>
     <p>Last Name: {{ result.name[0].family }}</p>
     <p>Gender: {{ result.gender }}</p>
     <p>Birth Date: {{ result.birthDate}}</p>
+    {% endif %}
     {% endif %}
     </div>
 </body>

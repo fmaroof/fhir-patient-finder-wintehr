@@ -34,11 +34,11 @@ def index():
     credentials = (username, password)
 
     if request.method == 'POST':
-        try:
-            number = int(request.form['number'])
+        number = request.form.get('number', '').strip()
+        if not number:
+            result = 'Invalid input. Please enter a patient ID.'
+        else:
             result = request_patient(number, credentials=credentials)
-        except ValueError:
-            result = 'Invalid input. Please enter a number.'
 
     return render_template('index.html', result=result)
 
