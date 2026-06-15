@@ -1,10 +1,12 @@
 import requests
 import os
+import urllib3
 from flask import Flask, request, render_template
 from dotenv import load_dotenv
 
 
 app = Flask(__name__)
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 load_dotenv()
 
@@ -14,7 +16,7 @@ password = os.getenv("FHIR_PASSWORD")
 
 def request_patient(patient_id, credentials):
 
-    req = requests.get(FHIR_SERVER_BASE_URL + "/Patient/" + str(patient_id), auth = credentials)
+    req = requests.get(FHIR_SERVER_BASE_URL + "/Patient/" + str(patient_id), auth = credentials, verify=False)
 
     print(f"Requests status: {req.status_code}")
 
@@ -41,6 +43,5 @@ def index():
     return render_template('index.html', result=result)
 
 if __name__ == '__main__':
-    port_str = os.environ['FHIR_PORT']
-    port_int = int(port_str)
-    app.run(debug=True, port=port_int)
+    port = int(os.environ.get('FHIR_PORT', 5001))
+    app.run(debug=True, port=port)

@@ -1,35 +1,25 @@
-# fhir-patient-finder
+# fhir-patient-finder-wintehr
 
 This is a FHIR web application written in Python and using Flask as the backend.
-
-Following are the FHIR server port numbers and the datasets hosted on that ports.
-
-```
-9090 -> synthea10 (demo dataset)
-9091 -> synthea_ri_adult
-9092 -> synthea_ri_peds
-```
 
 ## 1. Dependencies
 This app depends on Python 3 and a few Python packages outlined in the `requirements.txt` file. 
 
 ## 2. Before running the app
 
-Change these parameters in the .env file. Use the port number assigned to you to run the app for FHIR_PORT.
+We use environment variables to configure the app. 
 
-```
-FHIR_SERVER_BASE_URL= http://pwebmedcit.services.brown.edu:????/fhir
-FHIR_USERNAME = ???
-FHIR_PASSWORD = ???
-FHIR_PORT=????
-```
+1. Duplicate the `.env.example` file and rename the copy to exactly `.env`.
+2. Open your new `.env` file and fill in the missing values. 
+3. Assign yourself a unique 4 or 5-digit `FHIR_PORT` (e.g., 8080) so you don't conflict with other students on the OSCAR cluster. 
+*(Note: Authentication is currently disabled, so you can leave username/password blank for now).*
 
 ## 3. Running the App
 
 We begin by creating a Python virtual environment using the `venv` module. This is done by running the command below from the "root" of this repo. 
 
 ```
-python3 -m venv venv                 # create a virtual environment called venv
+/usr/bin/python3 -m venv venv                 # create a virtual environment called venv
 
 source venv/bin/activate             # activate our virtual environment
 
